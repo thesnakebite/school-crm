@@ -8,6 +8,7 @@ use App\Models\School;
 use App\Models\Student;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,6 +17,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // Limpiar y crear directorio de logos
+        Storage::disk('public')->deleteDirectory('logos');
+        Storage::disk('public')->makeDirectory('logos');
+
         User::create([
             'name' => 'Admin',
             'email' => 'admin@technodac.com',

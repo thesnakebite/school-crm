@@ -35,13 +35,19 @@ class SchoolController extends Controller
         $validated = $request->validated();
 
         if ($request->hasFile('logo')) {
-            $path = $request->file('logo')->store('public/logos');
-            $validated['logo'] = Storage::url($path);
+            $path = $request->file('logo');
+            // Guardamos usando el nombre hasheado del archivo para evitar duplicados
+            Storage::disk('public')
+                ->putFileAs('logos', $path, $path->hashName());
+
+            $validated['logo'] = '/storage/logos/' . $path->hashName();
         }
 
         School::create($validated);
 
-        return redirect()->route('schools.index')->with('success', 'Escuela creada con éxito');
+        return redirect()
+            ->route('schools.index')
+            ->with('success', 'Escuela creada con éxito');
     }
 
     /**
@@ -68,16 +74,26 @@ class SchoolController extends Controller
         $validated = $request->validated();
 
         if ($request->hasFile('logo')) {
+            $path= $request->file('logo');
+
+            // Eliminar logo anterior si existe
             if ($school->logo) {
-                Storage::delete(str_replace('/storage', 'public', $school->logo));
+                Storage::disk('public')
+                    ->delete(str_replace('/storage/', '', $school->logo));
             }
-            $path = $request->file('logo')->store('public/logos');
-            $validated['logo'] = Storage::url($path);
+
+            // Guardar nuevo logo
+            Storage::disk('public')
+                ->putFileAs('logos', $path, $path->hashName());
+                
+            $validated['logo'] = '/storage/logos/' . $path->hashName();
         }
 
         $school->update($validated);
 
-        return redirect()->route('schools.index')->with('success', 'Escuela actualizada con éxito');
+        return redirect()
+            ->route('schools.index')
+            ->with('success', 'Escuela actualizada con éxito');
     }
 
     /**

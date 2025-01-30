@@ -34,7 +34,7 @@
                                     <tr>
                                         <td>
                                             @if($school->logo)
-                                                <img src="{{ $school->logo }}" alt="Logo" width="50">
+                                                <img src="{{ $school->logo }}" alt="Logo" width="24" height="24">
                                             @else
                                                 Sin logo
                                             @endif
