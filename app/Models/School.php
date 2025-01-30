@@ -11,6 +11,10 @@ class School extends Model
     /** @use HasFactory<\Database\Factories\SchoolFactory> */
     use HasFactory;
 
+    protected $casts = [
+        'birthdate' => 'date'
+    ];
+
     protected $fillable = [
         'name',
         'address',
