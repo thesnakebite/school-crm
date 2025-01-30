@@ -92,7 +92,10 @@
                             />
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Crear Escuela</button>
+                        <button type="submit" class="btn btn-primary d-flex align-items-center gap-1">
+                            <i class="bi bi-save"></i>
+                            <span>Crear Escuela</span>
+                        </button>
                     </form>
                 </div>
             </div>

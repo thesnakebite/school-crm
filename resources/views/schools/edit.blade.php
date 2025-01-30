@@ -67,7 +67,10 @@
                                    id="website" name="website" value="{{ old('website', $school->website) }}">
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Actualizar Escuela</button>
+                        <button type="submit" class="btn btn-primary d-flex align-items-center gap-1">
+                            <i class="bi bi-save"></i>
+                            <span>Actualizar Escuela</span>
+                        </button>
                     </form>
                 </div>
             </div>
