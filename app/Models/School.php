@@ -19,4 +19,10 @@ class School extends Model
         'phone',
         'website'
     ];
+
+    // Una escuela tiene muchos estudiantes
+    public function students(): HasMany
+    {
+        return $this->hasMany(Student::class);
+    }
 }
